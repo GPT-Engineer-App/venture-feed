@@ -8,8 +8,8 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<Index />} />
-        <Route path="/landing" element={<LandingPage />} />
+        <Route exact path="/" element={<LandingPage />} />
+        <Route path="/projects" element={<Index />} />
       </Routes>
     </Router>
   );
