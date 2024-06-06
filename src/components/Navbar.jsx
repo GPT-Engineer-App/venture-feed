@@ -20,6 +20,9 @@ function Navbar() {
           <Link px={2} color="white" href="/messages">
             Messages
           </Link>
+          <Link px={2} color="white" href="/landing">
+            Landing
+          </Link>
         </Flex>
       </Flex>
     </Box>
