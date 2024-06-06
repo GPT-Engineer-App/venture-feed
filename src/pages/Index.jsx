@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, VStack, HStack, Text, Button, Select, Box, IconButton, Input, Textarea, Tab, TabList, TabPanel, TabPanels, Tabs, Badge } from "@chakra-ui/react";
+import { Container, VStack, HStack, Text, Button, Select, Box, IconButton, Input, Tab, TabList, TabPanel, TabPanels, Tabs, Badge, Avatar } from "@chakra-ui/react";
 import { FaThumbsUp, FaThumbsDown, FaCommentDots } from "react-icons/fa";
 
 const projects = [
@@ -48,18 +48,15 @@ const Index = () => {
   };
 
   return (
-    <Container maxW="container.xl" py={8}>
-      <VStack spacing={8}>
-        <Text fontSize="3xl" fontWeight="bold">
-          VC Platform
-        </Text>
-        <Select placeholder="Select Industry of Focus" value={selectedIndustry} onChange={(e) => setSelectedIndustry(e.target.value)}>
+    <Container maxW="container.lg" py={4} bg="gray.50">
+      <VStack spacing={4}>
+        <Select placeholder="Select Industry of Focus" value={selectedIndustry} onChange={(e) => setSelectedIndustry(e.target.value)} bg="white">
           <option value="tech">Tech</option>
           <option value="healthcare">Healthcare</option>
           <option value="finance">Finance</option>
           <option value="agriculture">Agriculture</option>
         </Select>
-        <Tabs variant="enclosed" width="100%">
+        <Tabs variant="soft-rounded" width="100%">
           <TabList>
             <Tab>Projects Feed</Tab>
             <Tab>Dashboard</Tab>
@@ -68,27 +65,30 @@ const Index = () => {
             <TabPanel>
               <VStack spacing={4} align="stretch">
                 {projects.map((project) => (
-                  <Box key={project.id} p={4} borderWidth="1px" borderRadius="lg">
+                  <Box key={project.id} p={4} borderWidth="1px" borderRadius="lg" bg="white">
                     <HStack justifyContent="space-between">
-                      <Text fontSize="2xl" fontWeight="bold">
-                        {project.title}
-                      </Text>
                       <HStack>
-                        <IconButton aria-label="Upvote" icon={<FaThumbsUp />} />
-                        <IconButton aria-label="Downvote" icon={<FaThumbsDown />} />
+                        <Avatar name={project.title} />
+                        <Text fontSize="lg" fontWeight="bold">
+                          {project.title}
+                        </Text>
+                      </HStack>
+                      <HStack>
+                        <IconButton aria-label="Upvote" icon={<FaThumbsUp />} variant="ghost" />
+                        <IconButton aria-label="Downvote" icon={<FaThumbsDown />} variant="ghost" />
                       </HStack>
                     </HStack>
-                    <Text>{project.description}</Text>
+                    <Text mt={2}>{project.description}</Text>
                     <HStack spacing={4} mt={4}>
-                      <Button leftIcon={<FaCommentDots />} onClick={() => handleAddComment(project.id)}>
+                      <Input placeholder="Add a comment" value={newComment} onChange={(e) => setNewComment(e.target.value)} bg="gray.100" />
+                      <Button leftIcon={<FaCommentDots />} onClick={() => handleAddComment(project.id)} colorScheme="twitter">
                         Comment
                       </Button>
-                      <Input placeholder="Add a comment" value={newComment} onChange={(e) => setNewComment(e.target.value)} />
                     </HStack>
                     <VStack align="start" mt={4}>
                       {comments[project.id] &&
                         comments[project.id].map((comment, index) => (
-                          <Text key={index} p={2} borderWidth="1px" borderRadius="md">
+                          <Text key={index} p={2} borderWidth="1px" borderRadius="md" bg="gray.100">
                             {comment}
                           </Text>
                         ))}
@@ -100,8 +100,8 @@ const Index = () => {
             <TabPanel>
               <VStack spacing={4} align="stretch">
                 {projects.map((project) => (
-                  <Box key={project.id} p={4} borderWidth="1px" borderRadius="lg">
-                    <Text fontSize="2xl" fontWeight="bold">
+                  <Box key={project.id} p={4} borderWidth="1px" borderRadius="lg" bg="white">
+                    <Text fontSize="lg" fontWeight="bold">
                       {project.title}
                     </Text>
                     <Text mt={2}>
